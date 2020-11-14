@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_14_133923) do
+ActiveRecord::Schema.define(version: 2020_11_14_143358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,20 @@ ActiveRecord::Schema.define(version: 2020_11_14_133923) do
     t.string "dispersant2"
     t.float "dispersant2_per"
     t.string "plasticizer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "moisturevalues", force: :cascade do |t|
+    t.string "formtype"
+    t.integer "proto_id"
+    t.string "number"
+    t.date "measureDate"
+    t.string "temp"
+    t.string "time"
+    t.float "endpoint"
+    t.float "MV"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

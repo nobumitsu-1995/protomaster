@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  formtype: MyString
+  proto_id: 1
+  number: MyString
+  measureDate: 2020-11-14
+  temp: MyString
+  time: MyString
+  endpoint: 1.5
+  MV: 1.5
+
+two:
+  formtype: MyString
+  proto_id: 1
+  number: MyString
+  measureDate: 2020-11-14
+  temp: MyString
+  time: MyString
+  endpoint: 1.5
+  MV: 1.5
