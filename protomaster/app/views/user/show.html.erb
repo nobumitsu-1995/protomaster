@@ -1,0 +1,19 @@
+<h1>ユーザー情報</h1>
+<div class="menu">
+  <p><i class="fas fa-edit"></i><%= link_to("編集","/user/edit") %></p>
+  <p id="delete_user"><i class="fas fa-trash-alt"></i>削除</p>
+</div>
+<div class="containar">
+  <div class="contents">
+    <table>
+      <tr>
+        <th>社員コード</th>
+        <td><%= @user.number %></td>
+      </tr>
+      <tr>
+        <th>名前</th>
+        <td><%= @user.name %></td>
+      </tr>
+    </table>
+  </div>
+</div>

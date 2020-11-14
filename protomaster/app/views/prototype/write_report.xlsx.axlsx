@@ -1,0 +1,233 @@
+workbook = xlsx_package.workbook
+workbook.styles do |s|
+  border_style = s.add_style(:border => { :style => :medium, :color => "00" })
+
+if @cvs && @cds
+  workbook.add_worksheet(
+    name: "色調",
+    :page_setup => {:orientation => :landscape, :paper_size => 9, :scale => 50},
+    :page_margins => {:right => 0.1, :left => 0.1, :top => 0.1, :bottom => 0.1}
+    ) do |sheet|
+      sheet.add_row ["〇色調"]
+      @cvs.each do |cv|
+        sheet.add_row ["FULL #{cv.comp} : 着色剤 = #{cv.fullcomp} : #{cv.fullcolor}"]
+        sheet.add_row ["TINT #{cv.comp} : 着色剤 : #{cv.tc} = #{cv.tintcomp} : #{cv.tintcolor} : #{cv.tc_value}"]
+      end
+      @cds.each do |cd|
+        sheet.add_row ["<<#{cd.measureDate}>>"]
+        sheet.add_row(["FULL","L*","a*","b*","E","","TINT","L*","a*","b*","E"] , style: border_style)
+        sheet.add_row([
+          "STD",
+          "#{(cd.fullL.to_f - cd.fulldL.to_f).floor(2)}",
+          "#{(cd.fulla.to_f - cd.fullda.to_f).floor(2)}",
+          "#{(cd.fullb.to_f - cd.fulldb.to_f).floor(2)}",
+          "-",
+          "",
+          "STD",
+          "#{(cd.tintL.to_f - cd.tintdL.to_f).floor(2)}",
+          "#{(cd.tinta.to_f - cd.tintda.to_f).floor(2)}",
+          "#{(cd.tintb.to_f - cd.tintdb.to_f).floor(2)}",
+          "-"
+        ] , style: border_style)
+        sheet.add_row([
+          "#{@proto.number}",
+          "#{cd.fullL.to_f.floor(2)}",
+          "#{cd.fulla.to_f.floor(2)}",
+          "#{cd.fullb.to_f.floor(2)}",
+          "-",
+          "",
+          "#{@proto.number}",
+          "#{cd.tintL.to_f.floor(2)}",
+          "#{cd.tinta.to_f.floor(2)}",
+          "#{cd.tintb.to_f.floor(2)}",
+          "-"
+        ] , style: border_style)
+        sheet.add_row([
+          "Δ",
+          "#{cd.fulldL.to_f.floor(2)}",
+          "#{cd.fullda.to_f.floor(2)}",
+          "#{cd.fulldb.to_f.floor(2)}",
+          "#{cd.fulldE.to_f.floor(2)}",
+          "",
+          "Δ",
+          "#{cd.tintdL.to_f.floor(2)}",
+          "#{cd.tintda.to_f.floor(2)}",
+          "#{cd.tintdb.to_f.floor(2)}",
+          "#{cd.tintdE.to_f.floor(2)}"
+        ] , style: border_style)
+        sheet.add_row []
+      end
+      sheet.column_widths(7,7,7,7,7,7,7,7,7,7,7,7,7,7,7)
+    end
+end
+
+if @vs
+  workbook.add_worksheet(
+    name: "粘度",
+    :page_setup => {:orientation => :landscape, :paper_size => 9, :scale => 50},
+    :page_margins => {:right => 0.1, :left => 0.1, :top => 0.1, :bottom => 0.1}
+    ) do |sheet|
+
+      sheet.merge_cells("A3:A4")
+      sheet.merge_cells("B3:C3")
+      sheet.merge_cells("D3:E3")
+      sheet.merge_cells("F3:G3")
+      sheet.merge_cells("H3:I3")
+      sheet.merge_cells("J3:K3")
+      sheet.merge_cells("L3:M3")
+      sheet.merge_cells("N3:O3")
+
+      sheet.add_row ["〇粘度"]
+      sheet.add_row ["#{@vs[0].roter} , #{@vs[0].temp}℃"]
+      vs_array1 = [""]
+      @vs.each do |v|
+        vs_array1.push("#{v.measureDate}","")
+      end
+      sheet.add_row(vs_array1 , style: border_style)
+      vs_array2 = [""]
+      @vs.each do |v|
+        vs_array2.push("#{v.speed1}rpm","#{v.speed2}rpm")
+      end
+      sheet.add_row(vs_array2 , style: border_style)
+      vs_array3 = ["S"]
+      @vs.each do |v|
+        vs_array3.push("","")
+      end
+      sheet.add_row(vs_array3 , style: border_style)
+      vs_array4 = ["#{@proto.number}"]
+      @vs.each do |v|
+        vs_array4.push("#{v.vs1}","#{v.vs2}")
+      end
+      sheet.add_row(vs_array4 , style: border_style)
+      sheet.column_widths(7,7,7,7,7,7,7,7,7,7,7,7,7,7,7)
+    end
+end
+
+if @mvs
+  workbook.add_worksheet(
+    name: "水分値",
+    :page_setup => {:orientation => :landscape, :paper_size => 9, :scale => 50},
+    :page_margins => {:right => 0.1, :left => 0.1, :top => 0.1, :bottom => 0.1}
+    ) do |sheet|
+      sheet.merge_cells("A3:B3")
+      sheet.merge_cells("C3:D3")
+      sheet.merge_cells("E3:F3")
+      sheet.merge_cells("G3:H3")
+      sheet.merge_cells("I3:J3")
+      sheet.merge_cells("K3:L3")
+      sheet.merge_cells("M3:N3")
+
+      sheet.merge_cells("A4:B4")
+      sheet.merge_cells("C4:D4")
+      sheet.merge_cells("E4:F4")
+      sheet.merge_cells("G4:H4")
+      sheet.merge_cells("I4:J4")
+      sheet.merge_cells("K4:L4")
+      sheet.merge_cells("M4:N4")
+
+      sheet.merge_cells("A5:B5")
+      sheet.merge_cells("C5:D5")
+      sheet.merge_cells("E5:F5")
+      sheet.merge_cells("G5:H5")
+      sheet.merge_cells("I5:J5")
+      sheet.merge_cells("K5:L5")
+      sheet.merge_cells("M5:N5")
+
+      sheet.add_row ["〇水分値"]
+      sheet.add_row ["#{@mvs[0].temp}℃ , #{@mvs[0].time}分 , 終点#{@mvs[0].endpoint}μ/s"]
+      mvs_array1 = ["",""]
+      @mvs.each do |mv|
+        mvs_array1.push("#{mv.measureDate}","")
+      end
+      sheet.add_row(mvs_array1 , style: border_style)
+      mvs_array2 = ["STD",""]
+      @mvs.each do |mv|
+        mvs_array2.push("","")
+      end
+      sheet.add_row(mvs_array2 , style: border_style)
+      mvs_array3 = ["#{@proto.number}",""]
+      @mvs.each do |mv|
+        mvs_array3.push("#{mv.MV}","")
+      end
+      sheet.add_row(mvs_array3 , style: border_style)
+      sheet.column_widths(7,7,7,7,7,7,7,7,7,7,7,7,7,7,7)
+    end
+end
+
+if @vrvs
+  workbook.add_worksheet(
+    name: "VR残率",
+    :page_setup => {:orientation => :landscape, :paper_size => 9, :scale => 50},
+    :page_margins => {:right => 0.1, :left => 0.1, :top => 0.1, :bottom => 0.1}
+    ) do |sheet|
+
+      sheet.merge_cells("A2:B3")
+      sheet.merge_cells("C2:D2")
+      sheet.merge_cells("E2:F2")
+      sheet.merge_cells("G2:H2")
+      sheet.merge_cells("I2:J2")
+      sheet.merge_cells("K2:L2")
+      sheet.merge_cells("M2:N2")
+
+      sheet.merge_cells("C3:D3")
+      sheet.merge_cells("E3:F3")
+      sheet.merge_cells("G3:H3")
+      sheet.merge_cells("I3:J3")
+      sheet.merge_cells("K3:L3")
+      sheet.merge_cells("M3:N3")
+
+      sheet.merge_cells("A4:B4")
+      sheet.merge_cells("C4:D4")
+      sheet.merge_cells("E4:F4")
+      sheet.merge_cells("G4:H4")
+      sheet.merge_cells("I4:J4")
+      sheet.merge_cells("K4:L4")
+      sheet.merge_cells("M4:N4")
+
+      sheet.merge_cells("A5:B5")
+      sheet.merge_cells("C5:D5")
+      sheet.merge_cells("E5:F5")
+      sheet.merge_cells("G5:H5")
+      sheet.merge_cells("I5:J5")
+      sheet.merge_cells("K5:L5")
+      sheet.merge_cells("M5:N5")
+
+      sheet.merge_cells("A6:B6")
+      sheet.merge_cells("C6:D6")
+      sheet.merge_cells("E6:F6")
+      sheet.merge_cells("G6:H6")
+      sheet.merge_cells("I6:J6")
+      sheet.merge_cells("K6:L6")
+      sheet.merge_cells("M6:N6")
+
+      sheet.add_row ["〇VR残率"]
+      vrvs_array1 = ["",""]
+      @vrvs.each do |vrv|
+        vrvs_array1.push("#{vrv.measureDate}","")
+      end
+      sheet.add_row(vrvs_array1 , style: border_style)
+      vrvs_array2 = ["",""]
+      @vrvs.each do |vrv|
+        vrvs_array2.push("着色剤#{vrv.color}","")
+      end
+      sheet.add_row(vrvs_array2 , style: border_style)
+      vrvs_array3 = ["ブランク",""]
+      @vrvs.each do |vrv|
+        vrvs_array3.push("#{vrv.brank}","")
+      end
+      sheet.add_row(vrvs_array3 , style: border_style)
+      vrvs_array4 = ["#{@proto.number}",""]
+      @vrvs.each do |vrv|
+        vrvs_array4.push("#{vrv.test}","")
+      end
+      sheet.add_row(vrvs_array4 , style: border_style)
+      vrvs_array5 = ["VR残率",""]
+      @vrvs.each do |vrv|
+        vrvs_array5.push("#{vrv.vr}","")
+      end
+      sheet.add_row(vrvs_array5 , style: border_style)
+      sheet.column_widths(7,7,7,7,7,7,7,7,7,7,7,7,7,7,7)
+    end
+end
+
+end

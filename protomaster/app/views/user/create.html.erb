@@ -1,0 +1,29 @@
+<h1>ユーザー登録</h1>
+<div class="containar">
+  <div class="contents">
+    <%= form_tag("/user/signin") do %>
+    <% if @user.errors.full_messages %>
+      <% @user.errors.full_messages.each do |message| %>
+        <div class="error-message">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+    <table>
+      <tr>
+        <th>社員コード</th>
+        <td><input type="number" name="number" value="<%= @user.number %>"></td>
+      </tr>
+      <tr>
+        <th>名前</th>
+        <td><input type="text" name="name" value="<%= @user.name %>"></td>
+      </tr>
+      <tr>
+        <th>パスワード</th>
+        <td><input type="password" name="password_digest" value="<%= @user.password_digest %>"></td>
+      </tr>
+    </table>
+    <input class="btn2" type="submit" value="ユーザー登録">
+    <% end %>
+  </div>
+</div>

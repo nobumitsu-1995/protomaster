@@ -1,0 +1,251 @@
+<h1><%= link_to("#{@name.name}(顧客名:#{@client.name})","/prototype/#{@proto.id}/show") %></h1>
+<div class="menu">
+  <p><i class="fas fa-plus"></i><%= link_to("追加",("/prototype/#{@proto.id}/add_data")) %></p>
+  <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{params[:id]}/destroy_datas",{method: "post"}) %></p>
+</div>
+<div class="containar">
+  <% case params[:table] %>
+    <% #色見条件 %>
+  <% when "cv" %>
+    <%= form_tag("/prototype/#{params[:id]}/cv/update_data")do %>
+      <div class="contents">
+        <h3>色見条件</h3>
+        <div class="menu">
+          <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@data.id}/cv/edit_data") %></p>
+          <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{@data.id}/cv/edit_data",{method: "post"}) %></p>
+        </div>
+        <table>
+          <tr>
+            <th>測定日</th>
+            <td colspan="3"><input type="date" name="cv_measureDate" value="<%= @data.measureDate %>"></td>
+          </tr>
+          <tr>
+            <th>コンパウンド名</th>
+            <td colspan="3"><input type="text" name="cv_comp" value="<%= @data.comp %>"></td>
+          </tr>
+          <tr>
+            <th>試験片形状</th>
+            <td colspan="3"><input type="text" name="cv_testShape" placeholder="ｼｰﾄ,ﾌﾟﾚｽ等" value="<%= @data.testShape %>"></td>
+          </tr>
+          <tr>
+            <th>ロール条件</th>
+            <th>温度</th>
+            <th>時間</th>
+            <th>厚み</th>
+          </tr>
+          <tr>
+            <th></th>
+            <td><input type="number" name="cv_temp" class="sheet-item" value="<%= @data.temp %>">℃</td>
+            <td><input type="number" name="cv_time" class="sheet-item" value="<%= @data.time %>">秒</td>
+            <td><input type="number" name="cv_thickness" class="sheet-item" step="0.01" value="<%= @data.thickness %>">mm</td>
+          </tr>
+          <tr>
+            <th>シート配合</th>
+            <th>着色材量</th>
+            <th>コンパウンド量</th>
+            <th>割色<input type="text" name="cv_tc" class="sheet-item" value="<%= @data.tc %>"></th>
+          </tr>
+          <tr>
+            <th>FULL</th>
+            <td><input type="number" name="cv_fullcolor" class="sheet-item2" step="0.001" value="<%= @data.fullcolor %>"></td>
+            <td><input type="number" name="cv_fullcomp" class="sheet-item2" step="0.001" value="<%= @data.fullcomp %>"></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th>TINT</th>
+            <td><input type="number" name="cv_tintcolor" class="sheet-item2" step="0.001" value="<%= @data.tintcolor %>"></td>
+            <td><input type="number" name="cv_tintcomp" class="sheet-item2" step="0.001" value="<%= @data.tintcomp %>"></td>
+            <td><input type="number" name="cv_tc_value" class="sheet-item2" step="0.001" value="<%= @data.tc_value %>"></td>
+          </tr>
+        </table>
+        <input class="btn2" type="submit" value="試作品情報 更新">
+      </div>
+    <% end %>
+    <% #色差 %>
+  <% when "cd" %>
+    <%= form_tag("/prototype/#{params[:id]}/cd/update_data")do %>
+      <div class="contents">
+        <h3>色差</h3>
+        <div class="menu">
+          <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@data.id}/cd/edit_data") %></p>
+          <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{@data.id}/cd/edit_data",{method: "post"}) %></p>
+        </div>
+        <table>
+          <tr>
+            <th>測定日</th>
+            <td colspan="4"><input type="date" name="cd_measureDate" value="<%= @data.measureDate %>"></td>
+          </tr>
+          <tr>
+            <th>試作品Lab値</th>
+            <th>L*</th>
+            <th>a*</th>
+            <th>b*</th>
+            <th>-</th>
+          </tr>
+          <tr>
+            <th>FULL</th>
+            <td><input type="number" name="cd_fullL" class="sheet-item2" step="0.01" value="<%= @data.fullL %>"></td>
+            <td><input type="number" name="cd_fulla" class="sheet-item2" step="0.01" value="<%= @data.fulla %>"></td>
+            <td><input type="number" name="cd_fullb" class="sheet-item2" step="0.01" value="<%= @data.fullb %>"></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th>TINT</th>
+            <td><input type="number" name="cd_tintL" class="sheet-item2" step="0.01" value="<%= @data.tintL %>"></td>
+            <td><input type="number" name="cd_tinta" class="sheet-item2" step="0.01" value="<%= @data.tinta %>"></td>
+            <td><input type="number" name="cd_tintb" class="sheet-item2" step="0.01" value="<%= @data.tintb %>"></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th>試作品Δ値</th>
+            <th>ΔL*</th>
+            <th>Δa*</th>
+            <th>Δb*</th>
+            <th>ΔE</th>
+          </tr>
+          <tr>
+            <th>FULL</th>
+            <td><input type="number" name="cd_fulldL" class="sheet-item2" step="0.01" value="<%= @data.fulldL %>"></td>
+            <td><input type="number" name="cd_fullda" class="sheet-item2" step="0.01" value="<%= @data.fullda %>"></td>
+            <td><input type="number" name="cd_fulldb" class="sheet-item2" step="0.01" value="<%= @data.fulldb %>"></td>
+            <td><input type="number" name="cd_fulldE" class="sheet-item2" step="0.01" value="<%= @data.fulldE %>"></td>
+          </tr>
+          <tr>
+            <th>TINT</th>
+            <td><input type="number" name="cd_tintdL" class="sheet-item2" step="0.01" value="<%= @data.tintdL %>"></td>
+            <td><input type="number" name="cd_tintda" class="sheet-item2" step="0.01" value="<%= @data.tintda %>"></td>
+            <td><input type="number" name="cd_tintdb" class="sheet-item2" step="0.01" value="<%= @data.tintdb %>"></td>
+            <td><input type="number" name="cd_tintdE" class="sheet-item2" step="0.01" value="<%= @data.tintdE %>"></td>
+          </tr>
+        </table>
+        <input class="btn2" type="submit" value="試作品情報 更新">
+      </div>
+    <% end %>
+    <% #水分値 %>
+  <% when "mv" %>
+    <%= form_tag("/prototype/#{params[:id]}/mv/update_data")do %>
+      <div class="contents">
+        <h3>水分値</h3>
+        <div class="menu">
+          <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@data.id}/mv/edit_data") %></p>
+          <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{@data.id}/mv/edit_data",{method: "post"}) %></p>
+        </div>
+        <table>
+          <tr>
+            <th>測定日</th>
+            <td colspan="3"><input type="date" name="mv_measureDate" value="<%= @data.measureDate %>"></td>
+          </tr>
+          <tr>
+            <th>測定条件</th>
+            <th>温度</th>
+            <th>時間</th>
+            <th>終点</th>
+          </tr>
+          <tr>
+            <th></th>
+            <td><input type="number" name="mv_temp" class="sheet-item" value="<%= @data.temp %>">℃</td>
+            <td><input type="text" name="mv_time" class="sheet-item" value="<%= @data.time %>">分</td>
+            <td><input type="number" name="mv_endpoint" class="sheet-item" step="0.01" value="<%= @data.endpoint %>">μg/s</td>
+          </tr>
+          <tr>
+            <th>測定値</th>
+            <td colspan="3"><input type="number" name="mv_MV" class="sheet-item2" step="0.01" value="<%= @data.MV %>">ppm</td>
+          </tr>
+        </table>
+        <input class="btn2" type="submit" value="試作品情報 更新">
+      </div>
+    <% end %>
+    <% #VR残率 %>
+  <% when "vrv" %>
+    <%= form_tag("/prototype/#{params[:id]}/vrv/update_data")do %>
+      <div class="contents">
+        <h3>VR残率</h3>
+        <div class="menu">
+          <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@data.id}/vrv/edit_data") %></p>
+          <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{@data.id}/vrv/edit_data",{method: "post"}) %></p>
+        </div>
+        <table>
+          <tr>
+            <th>測定日</th>
+            <td colspan="3"><input type="date" name="vrv_measureDate" value="<%= @data.measureDate %>"></td>
+          </tr>
+          <tr>
+            <th>コンパウンド名</th>
+            <td colspan="3"><input type="text" name="vrv_compname" value="<%= @data.compname %>"></td>
+          </tr>
+          <tr>
+            <th>ロール条件</th>
+            <th>温度</th>
+            <th>時間</th>
+            <th>厚み</th>
+          </tr>
+          <tr>
+            <th></th>
+            <td><input type="number" name="vrv_temp" class="sheet-item" value="<%= @data.temp %>">℃</td>
+            <td><input type="number" name="vrv_time" class="sheet-item" value="<%= @data.time %>">秒</td>
+            <td><input type="number" name="vrv_thickness" class="sheet-item" step="0.01" value="<%= @data.thickness %>">mm</td>
+          </tr>
+          <tr>
+            <th>シート配合</th>
+            <th>着色剤量</th>
+            <th colspan="2">コンパウンド量</th>
+          </tr>
+          <tr>
+            <th></th>
+            <td><input type="number" name="vrv_color" class="sheet-item2" step="0.01" value="<%= @data.color %>"></td>
+            <td colspan="2"><input type="number" name="vrv_comp" class="sheet-item2" value="<%= @data.comp %>"></td>
+          </tr>
+          <tr>
+            <th>測定値</th>
+            <th>ブランク抵抗値</th>
+            <th>試作品抵抗値</th>
+            <th>VR残率</th>
+          </tr>
+          <tr>
+            <th></th>
+            <td><input type="number" step="0.0001" name="vrv_brank" class="sheet-item2" value="<%= @data.brank %>">×10<input type="number" name="vrv_brank_expo" class="exponentiation" value="<%= @data.brank_expo %>"></td>
+            <td><input type="number" step="0.0001" name="vrv_test" class="sheet-item2" value="<%= @data.test %>">×10<input type="number" name="vrv_test_expo" class="exponentiation" value="<%= @data.test_expo %>"></td>
+            <td><input type="number" step="0.01" name="vrv_vr" class="sheet-item" value="<%= @data.vr %>">%</td>
+          </tr>
+        </table>
+        <input class="btn2" type="submit" value="試作品情報 更新">
+      </div>
+    <% end %>
+    <% #粘度 %>
+  <% when "v" %>
+    <%= form_tag("/prototype/#{params[:id]}/v/update_data")do %>
+      <div class="contents">
+        <h3>粘度</h3>
+        <div class="menu">
+          <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@data.id}/v/edit_data") %></p>
+          <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{@data.id}/v/edit_data",{method: "post"}) %></p>
+        </div>
+        <table>
+          <tr>
+            <th>測定日</th>
+            <td colspan="2"><input type="date" name="v_measureDate" value="<%= @data.measureDate %>"></td>
+          </tr>
+          <tr>
+            <th>温度</th>
+            <td colspan="2"><input type="number" name="v_temp" class="sheet-item" value="<%= @data.temp %>">℃</td>
+          </tr>
+          <tr>
+            <th>ローター番号</th>
+            <td colspan="2"><input type="text" name="v_roter" class="sheet-item2" value="<%= @data.roter %>"></td>
+          </tr>
+          <tr>
+            <th>回転数</th>
+            <th>①<input type="number" name="v_speed1" class="sheet-item" value="<%= @data.speed1 %>">rpm</th>
+            <th>②<input type="number" name="v_speed2" class="sheet-item" value="<%= @data.speed2 %>">rpm</th>
+          </tr>
+          <tr>
+            <th>粘度</th>
+            <td><input type="number" name="v_vs1" class="sheet-item2" value="<%= @data.vs1 %>">mPa・s</td>
+            <td><input type="number" name="v_vs2" class="sheet-item2" value="<%= @data.vs2 %>">mPa・s</td>
+          </tr>
+        </table>
+        <input class="btn2" type="submit" value="試作品情報 更新">
+      </div>
+    <% end %>
+  <% end %>
+</div>

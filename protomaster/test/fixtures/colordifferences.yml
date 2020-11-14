@@ -1,0 +1,43 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  formtype: MyString
+  proto_id: 1
+  number: MyString
+  fullL: 
+  fulla: 
+  fullb: 
+  tintL: 
+  tinta: 
+  tintb: 
+  fulldL: 
+  fullda: 
+  fulldb: 
+  fulldE: 
+  tintdL: 
+  tintda: 
+  tintdb: 
+  tintdE: 
+  user_id: 1
+  measureDate: 2020-11-14
+
+two:
+  formtype: MyString
+  proto_id: 1
+  number: MyString
+  fullL: 
+  fulla: 
+  fullb: 
+  tintL: 
+  tinta: 
+  tintb: 
+  fulldL: 
+  fullda: 
+  fulldb: 
+  fulldE: 
+  tintdL: 
+  tintda: 
+  tintdb: 
+  tintdE: 
+  user_id: 1
+  measureDate: 2020-11-14

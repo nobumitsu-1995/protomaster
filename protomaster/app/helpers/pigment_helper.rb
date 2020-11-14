@@ -1,0 +1,2 @@
+module PigmentHelper
+end

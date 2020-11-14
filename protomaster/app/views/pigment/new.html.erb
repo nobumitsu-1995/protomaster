@@ -1,0 +1,30 @@
+<h1>顔料マスター登録</h1>
+  <%= form_tag("/pigment/create") do %>
+  <div class="containar">
+    <div class="contents">
+      <table>
+        <tr>
+          <th>品コード</th>
+          <td><input type="text" name="code" value="<%= @pig.code %>"></td>
+        </tr>
+        <tr>
+          <th>顔料名</th>
+          <td><input type="text" name="name" value="<%= @pig.name %>"></td>
+        </tr>
+        <tr>
+          <th>メーカー名</th>
+          <td><input type="text" name="maker" value="<%= @pig.maker %>"></td>
+        </tr>
+        <tr>
+          <th>ピグメントNo</th>
+          <td><input type="text" name="pig_no" value="<%= @pig.pig_no %>"></td>
+        </tr>
+        <tr>
+          <th>顔料構造</th>
+          <td><input type="text" name="structure" value="<%= @pig.structure %>"></td>
+        </tr>
+      </table>
+      <input class="btn" type="submit" value="顔料情報 追加">
+    </div>
+  </div>
+  <% end %>

@@ -1,0 +1,59 @@
+<div class="contents">
+  <h1>顧客一覧</h1>
+  <table class="index">
+    <thead>
+      <tr>
+        <th class="index_client">顧客名</th>
+        <th class="index_name">試作品名</th>
+        <th class="index_formtype">形状</th>
+        <th class="index_proto_number">配合番号</th>
+        <th class="index_measureDate">作製日</th>
+        <th class="index_menu">メニュー</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @clients.each do |client| %>
+        <tr class="open_proto">
+          <th><%= client.name %></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% @protos_name.each do |proto_name| %>
+        <% if proto_name.client == client.id %>
+          <tr class="hide_number hide open_proto2">
+            <th></th>
+            <th><%= proto_name.name %></th>
+            <th><%= proto_name.formtype %></th>
+            <th></th>
+            <th></th>
+            <th>
+              <div class="menu">
+                <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{proto_name.id}/edit_proto") %></p>
+                <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{proto_name.id}/destroy_proto",{method: "post"}) %></p>
+              </div>
+            </th>
+          </tr>
+          <% @protos.each do |proto| %>
+          <% if proto.name == proto_name.id %>
+            <tr class="hide_number2 hide">
+              <td colspan="3"></td>
+              <td><%= link_to(proto.number,"/prototype/#{proto.id}/show") %> </td>
+              <td><%= proto.measureDate %></td>
+              <td>
+                <div class="menu">
+                  <p><i class="fas fa-plus"></i><%= link_to("追加","/prototype/#{proto.id}/add_data") %></p>
+                  <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{proto.id}/destroy_datas",{method: "post"}) %></p>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+          <% end %>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

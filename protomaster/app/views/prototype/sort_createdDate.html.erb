@@ -1,0 +1,32 @@
+<div class="contents">
+  <h1>試作品一覧</h1>
+  <table class="index">
+    <thead>
+      <tr>
+        <th class="index_name">試作品名</th>
+        <th class="index_formtype">形状</th>
+        <th class="index_client">顧客名</th>
+        <th class="index_proto_number">配合番号</th>
+        <th class="index_measureDate">作製日</th>
+        <th class="index_menu">メニュー</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @protos.each do |proto| %>
+      <tr>
+        <td><%= PrototypeName.find_by(id:proto.name).name %></td>
+        <td><%= proto.formtype %></td>
+        <td><%= Client.find_by(id:proto.client).name %></td>
+        <td><%= link_to(proto.number,"/prototype/#{proto.id}/show") %> </td>
+        <td><%= proto.measureDate %></td>
+        <td>
+          <div class="menu">
+            <p><i class="fas fa-plus"></i><%= link_to("追加","/prototype/#{proto.id}/add_data") %></p>
+            <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{proto.id}/destroy_datas",{method: "post"}) %></p>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

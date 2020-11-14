@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PrototypeMaster</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="modal_background">
+      <div class="modal">
+        <%= form_tag("/user/destroy")do %>
+        <div class="modal_top">
+          <i id="close_modal" class="far fa-times-circle"></i>
+          <h3>ユーザー情報を削除します。</h3>
+          <p>パスワードを入力してください。</p>
+        </div>
+        <div class="">
+          <input class="passspace" type="password" name="password" placeholder="パスワード">
+        </div>
+        <div class="modal_bottom">
+          <input type="submit" value="ユーザー情報削除">
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="rayout">
+      <header>
+        <ul>
+          <li><%= link_to("メニュー","/") %></li>
+        </ul>
+        <ul class="openarea">
+          <li class="underline">試作品</li>
+          <ul class="accordion">
+            <li><%= link_to("試作品マスター登録","/prototype/new")%></li>
+            <li><%= link_to("試作品照会","/prototype/index")
+             %></li>
+            <li><%= link_to("レポート作製","/prototype/report") %></li>
+          </ul>
+        </ul>
+        <ul class="openarea">
+          <li class="underline">半製品</li>
+          <ul class="accordion">
+            <li><%= link_to("半製品マスター登録","/half_product/new") %></li>
+            <li><%= link_to("半製品照会","/half_product/index") %></li>
+          </ul>
+        </ul>
+        <ul class="openarea">
+          <li class="underline">顔料</li>
+          <ul class="accordion">
+            <li><%= link_to("顔料マスター登録","/pigment/new") %></li>
+            <li><%= link_to("顔料照会","/pigment/index") %></li>
+          </ul>
+        </ul>
+        <ul class="user_menu">
+          <% if session[:user_id] %>
+            <li class="border">社員番号</li>
+            <li><%= @current_user.number %></li>
+            <li class="border">ユーザー名</li>
+            <li><%= link_to(@current_user.name,"/user/show") %></li>
+            <%= form_tag("/user/logout")do %>
+            <li><input type="submit" value="ログアウト"></li>
+            <% end %>
+          <% else %>
+            <li><%= link_to("ログイン","/user/login_form") %></li>
+            <li class="red"><%= link_to("ユーザー登録","/user/create") %></li>
+          <% end %>
+        </ul>
+      </header>
+      <div class="close_header">
+        <i id="close_header" class="far fa-caret-square-left"></i>
+      </div>
+      <% if session[:left_menu] == "prototype" %>
+      <div class="left">
+        <%= form_tag("/prototype/sort",{method:"get"})do %>
+          <div class="search">
+            <%= select_tag(:column , options_for_select([["試作品名","name"],["顧客名","client"]],@selected)) %>
+            <input type="search" name="search_txt" value="<%= @text %>" placeholder="検索">
+            <input class="btn" type="submit" value="検索">
+          </div>
+        <% end %>
+        <div class="sort">
+          <p><%= link_to("品名順","/prototype/index") %></p>
+          <p><%= link_to("顧客順","/prototype/sort_client") %></p>
+          <p><%= link_to("作製日順","/prototype/sort_createdDate") %></p>
+        </div>
+      </div>
+      <% elsif session[:left_menu] == "half_product" %>
+      <div class="left">
+        <%= form_tag("/half_product/sort",{method:"get"})do %>
+        <div class="search">
+          <%= select_tag(:column , options_for_select([["半製品名","name"],["品コード","code"],["顔料名","pigment"],["分散剤名","dispersant"]],@selected)) %>
+          <input type="search" name="search_txt" value="<%= @text %>" placeholder="検索">
+          <input class="btn" type="submit" value="検索">
+        </div>
+        <% end %>
+        <div class="sort">
+          <p><%= link_to("品名順","/half_product/index") %></p>
+          <p><%= link_to("品コード順","/half_product/sort_code") %></p>
+        </div>
+      </div>
+      <% elsif session[:left_menu] == "pigment" %>
+      <div class="left">
+        <%= form_tag("/pigment/sort",{method:"get"})do %>
+        <div class="search">
+          <%= select_tag(:column , options_for_select([["顔料名","name"],["品コード","code"],["ピグメントNo","pig_no"],["構造名","structure"]],@selected)) %>
+          <input type="search" name="search_txt" value="<%= @text %>" placeholder="検索">
+          <input class="btn" type="submit" value="検索">
+        </div>
+        <% end %>
+        <div class="sort">
+          <p><%= link_to("品名順","/pigment/index") %></p>
+          <p><%= link_to("品コード順","/pigment/sort_code") %></p>
+          <p><%= link_to("メーカー順","/pigment/sort_maker") %></p>
+          <p><%= link_to("ピグメントNo順","/pigment/sort_pig_no") %></p>
+        </div>
+      </div>
+      <% else %>
+      <div class="left">
+        <% if @current_user %>
+          <p><%= link_to("ユーザー情報","/user/show") %></p>
+          <p><%= link_to("ユーザー情報編集","/user/edit") %></p>
+        <% else %>
+          <p><%= link_to("ユーザー登録","/user/create") %></p>
+          <p><%= link_to("ログイン","/user/login_form") %></p>
+        <% end %>
+      </div>
+      <% end %>
+      <div class="close_left">
+        <i id="close_left" class="far fa-caret-square-left"></i>
+      </div>
+    </div>
+    <div class="body">
+      <div class="space_header open_header_padding">
+      </div>
+      <div class="space_left open_left_padding">
+      </div>
+      <div class="main">
+        <% if flash[:notice] %>
+        <div class="flash">
+          <p><%= flash[:notice] %></p>
+        </div>
+        <% end %>
+        <div class="yield">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <%= javascript_pack_tag 'prototype/script' %>
+  </body>
+</html>

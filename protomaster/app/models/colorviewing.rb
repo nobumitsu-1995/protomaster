@@ -1,0 +1,2 @@
+class Colorviewing < ApplicationRecord
+end

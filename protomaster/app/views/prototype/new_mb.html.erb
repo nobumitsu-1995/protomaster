@@ -1,0 +1,217 @@
+  <h1><%= @mb_n.name %>(顧客：<%= @client.name %>)</h1>
+  <%= form_tag("/prototype/#{params[:id]}/update_mb")do %>
+  <div class="containar">
+    <% #基本情報 %>
+    <div class="contents">
+      <h3>試作品情報</h3>
+      <table>
+        <tr class="content">
+          <th>形状</th>
+          <td><%= @mb_n.formtype %></td>
+        </tr>
+        <tr class="content">
+          <th>品名</th>
+          <td><%= @mb_n.name %></td>
+        </tr>
+        <tr class="content">
+          <th>顧客名</th>
+          <td><%= @client.name %></td>
+        </tr>
+        <tr>
+          <th>配合番号</th>
+          <td><input type="text" name="number" value="<%= @mb.number %>"></td>
+        </tr>
+        <tr>
+          <th>作製日</th>
+          <td><input type="date" name="measureDate" value="<%= @mb.measureDate %>"></td>
+        </tr>
+        <tr>
+          <th>粒度</th>
+          <td><input type="text" name="particle" value="<%= @mb.particle %>"></td>
+        </tr>
+        <tr>
+          <th>加工条件</th>
+          <td><textarea name="conditions" value="<%= @mb.conditions %>" rows="3" cols="33" placeholder="使用機器、加工温度、回転数、時間、パス回数"></textarea></td>
+        </tr>
+        <tr>
+          <th>メモ</th>
+          <td><textarea name="memo" value="<%= @mb.memo %>" rows="3" cols="33"></textarea></td>
+        </tr>
+      </table>
+    </div>
+    <% #色見条件 %>
+    <div class="contents">
+      <h3>色見条件</h3>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="3"><input type="date" name="cv_measureDate"></td>
+        </tr>
+        <tr>
+          <th>コンパウンド名</th>
+          <td colspan="3"><input type="text" name="cv_comp"></td>
+        </tr>
+        <tr>
+          <th>試験片形状</th>
+          <td colspan="3"><input type="text" name="cv_testShape" placeholder="ｼｰﾄ,ﾌﾟﾚｽ等"></td>
+        </tr>
+        <tr>
+          <th>ロール条件</th>
+          <th>温度</th>
+          <th>時間</th>
+          <th>厚み</th>
+        </tr>
+        <tr>
+          <th></th>
+          <td><input type="number" name="cv_temp" class="sheet-item">℃</td>
+          <td><input type="number" name="cv_time" class="sheet-item">秒</td>
+          <td><input type="number" name="cv_thickness" class="sheet-item" step="0.01">mm</td>
+        </tr>
+        <tr>
+          <th>シート配合</th>
+          <th>着色材量</th>
+          <th>コンパウンド量</th>
+          <th>割色<input type="text" name="cv_tc" class="sheet-item"></th>
+        </tr>
+        <tr>
+          <th>FULL</th>
+          <td><input type="number" name="cv_fullcolor" class="sheet-item2" step="0.001"></td>
+          <td><input type="number" name="cv_fullcomp" class="sheet-item2" step="0.001"></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <th>TINT</th>
+          <td><input type="number" name="cv_tintcolor" class="sheet-item2" step="0.001"></td>
+          <td><input type="number" name="cv_tintcomp" class="sheet-item2" step="0.001"></td>
+          <td><input type="number" name="cv_tc_value" class="sheet-item2" step="0.001"></td>
+        </tr>
+      </table>
+    </div>
+    <% #色差 %>
+    <div class="contents">
+      <h3>色差</h3>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="4"><input type="date" name="cd_measureDate" value=""></td>
+        </tr>
+        <tr>
+          <th>試作品Lab値</th>
+          <th>L*</th>
+          <th>a*</th>
+          <th>b*</th>
+          <th>-</th>
+        </tr>
+        <tr>
+          <th>FULL</th>
+          <td><input type="number" name="cd_fullL" class="sheet-item2" step="0.01"></td>
+          <td><input type="number" name="cd_fulla" class="sheet-item2" step="0.01"></td>
+          <td><input type="number" name="cd_fullb" class="sheet-item2" step="0.01"></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <th>TINT</th>
+          <td><input type="number" name="cd_tintL" class="sheet-item2" step="0.01"></td>
+          <td><input type="number" name="cd_tinta" class="sheet-item2" step="0.01"></td>
+          <td><input type="number" name="cd_tintb" class="sheet-item2" step="0.01"></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <th>試作品Δ値</th>
+          <th>ΔL*</th>
+          <th>Δa*</th>
+          <th>Δb*</th>
+          <th>ΔE</th>
+        </tr>
+        <tr>
+          <th>FULL</th>
+          <td><input type="number" name="cd_fulldL" class="sheet-item2" step="0.01"></td>
+          <td><input type="number" name="cd_fullda" class="sheet-item2" step="0.01"></td>
+          <td><input type="number" name="cd_fulldb" class="sheet-item2" step="0.01"></td>
+          <td><input type="number" name="cd_fulldE" class="sheet-item2" step="0.01"></td>
+        </tr>
+        <tr>
+          <th>TINT</th>
+          <td><input type="number" name="cd_tintdL" class="sheet-item2" step="0.01"></td>
+          <td><input type="number" name="cd_tintda" class="sheet-item2" step="0.01"></td>
+          <td><input type="number" name="cd_tintdb" class="sheet-item2" step="0.01"></td>
+          <td><input type="number" name="cd_tintdE" class="sheet-item2" step="0.01"></td>
+        </tr>
+      </table>
+    </div>
+    <% #水分値 %>
+    <div class="contents">
+      <h3>水分値</h3>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="3"><input type="date" name="mv_measureDate"></td>
+        </tr>
+        <tr>
+          <th>測定条件</th>
+          <th>温度</th>
+          <th>時間</th>
+          <th>終点</th>
+        <tr>
+          <th></th>
+          <td><input type="number" name="mv_temp" class="sheet-item">℃</td>
+          <td><input type="text" name="mv_time" class="sheet-item">分</td>
+          <td><input type="number" name="mv_endpoint" class="sheet-item" step="0.01">μg/s</td>
+        </tr>
+        <tr>
+          <th>測定値</th>
+          <td colspan="3"><input type="number" name="mv_MV" class="sheet-item2" step="0.01">ppm</td>
+        </tr>
+      </table>
+    </div>
+    <% #VR残率 %>
+    <div class="contents">
+      <h3>VR残率</h3>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="3"><input type="date" name="vrv_measureDate"></td>
+        </tr>
+        <tr>
+          <th>コンパウンド名</th>
+          <td colspan="3"><input type="text" name="vrv_compname"></td>
+        </tr>
+        <tr>
+          <th>ロール条件</th>
+          <th>温度</th>
+          <th>時間</th>
+          <th>厚み</th>
+        </tr>
+        <tr>
+          <th></th>
+          <td><input type="number" name="vrv_temp" class="sheet-item">℃</td>
+          <td><input type="number" name="vrv_time" class="sheet-item">秒</td>
+          <td><input type="number" name="vrv_thickness" class="sheet-item" step="0.01">mm</td>
+        </tr>
+        <tr>
+          <th>シート配合</th>
+          <th>着色剤量</th>
+          <th colspan="2">コンパウンド量</th>
+        </tr>
+        <tr>
+          <th></th>
+          <td><input type="number" name="vrv_color" class="sheet-item2" step="0.01"></td>
+          <td colspan="2"><input type="number" name="vrv_comp" class="sheet-item2"></td>
+        </tr>
+        <tr>
+          <th>測定値</th>
+          <th>ブランク抵抗値</th>
+          <th>試作品抵抗値</th>
+          <th>VR残率</th>
+        </tr>
+        <tr>
+          <th></th>
+          <td><input type="number" step="0.0001" name="vrv_blank" class="sheet-item2">×10<input type="number" name="vrv_blank_expo" class="exponentiation"></td>
+          <td><input type="number" step="0.0001" name="vrv_test" class="sheet-item2">×10<input type="number" name="vrv_test_expo" class="exponentiation"></td>
+          <td><input type="number" step="0.01" name="vrv_vr" class="sheet-item">%</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <input class="fixed_btn" type="submit" value="試作品情報 追加">
+  <% end %>

@@ -1,0 +1,34 @@
+<h1>半製品マスター編集</h1>
+  <%= form_tag("/half_product/#{params[:id]}/update") do %>
+  <div class="containar">
+    <div class="contents">
+      <table>
+        <tr>
+          <th>品コード</th>
+          <td><input type="text" name="code" value="<%= @hp.code %>"></td>
+        </tr>
+        <tr>
+          <th>品名</th>
+          <td><input type="text" name="name" value="<%= @hp.name %>"></td>
+        </tr>
+        <tr>
+          <th>使用顔料</th>
+          <td><input type="text" name="pigment" value="<%= @hp.pigment %>"></td>
+        </tr>
+        <tr>
+          <th>顔料濃度</th>
+          <td><input type="text" name="pigment_per" value="<%= @hp.pigment_per %>"></td>
+        </tr>
+        <tr>
+          <th>使用分散剤</th>
+          <td><input type="text" name="dispersant" value="<%= @hp.dispersant %>"></td>
+        </tr>
+        <tr>
+          <th>分散剤濃度</th>
+          <td><input type="text" name="dispersant_per" value="<%= @hp.dispersant_per %>"></td>
+        </tr>
+      </table>
+      <input class="btn" type="submit" value="半製品情報 更新">
+    </div>
+  </div>
+  <% end %>

@@ -1,0 +1,2 @@
+class HalfProduct < ApplicationRecord
+end

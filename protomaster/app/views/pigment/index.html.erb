@@ -1,0 +1,24 @@
+<div class="contents">
+  <h1>顔料一覧</h1>
+  <table class="index">
+    <thead>
+      <tr>
+        <th class="pig_index_code">品コード</th>
+        <th class="pig_index_name">顔料名</th>
+        <th class="pig_index_pig_no">ピグメントNo</th>
+        <th class="pig_index_structure">構造名</th>
+        <th class="pig_index_maker">メーカー</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pigs.each do |pig| %>
+        <tr>
+          <td><%= pig.code %></td>
+          <td><%= link_to(pig.name,"/pigment/#{pig.id}/show") %></td>
+          <td><%= pig.pig_no %></td>
+          <td><%= pig.structure %></td>
+          <td><%= pig.maker %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

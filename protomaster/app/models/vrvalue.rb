@@ -1,0 +1,2 @@
+class Vrvalue < ApplicationRecord
+end

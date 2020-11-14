@@ -1,0 +1,27 @@
+<h1><%= @pig.name %>(品コード：<%= @pig.code %>)</h1>
+<div class="menu">
+  <p><i class="fas fa-edit"></i><%= link_to("編集","/pigment/#{params[:id]}/edit") %></p>
+  <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/pigment/#{params[:id]}/destroy",{method: "post"}) %></p>
+</div>
+<div class="containar">
+  <div class="contents">
+    <table>
+      <tr>
+        <th>品コード</th>
+        <td><%= @pig.code %></td>
+      </tr>
+      <tr>
+        <th>品名</th>
+        <td><%= @pig.name %></td>
+      </tr>
+      <tr>
+        <th>メーカー</th>
+        <td><%= @pig.maker %></td>
+      </tr>
+      <tr>
+        <th>ピグメントNo</th>
+        <td><%= @pig.pig_no %>(<%= @pig.structure %>)</td>
+      </tr>
+    </table>
+  </div>
+</div>

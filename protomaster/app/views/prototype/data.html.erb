@@ -1,0 +1,235 @@
+<h1><%= link_to("#{@name.name}(顧客名:#{@client.name})","/prototype/#{@proto.id}/show") %></h1>
+<div class="menu">
+  <p><i class="fas fa-plus"></i></i><%= link_to("追加",("/prototype/#{@proto.id}/add_data")) %></p>
+  <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{params[:id]}/destroy_datas",{method: "post"}) %></p>
+</div>
+<div class="containar">
+  <% case params[:table] %>
+  <% #色見条件 %>
+  <% when "cv" %>
+  <div class="contents">
+    <h3>色見条件</h3>
+    <div class="menu">
+      <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@data.id}/cv/edit_data") %></p>
+      <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{@data.id}/cv/edit_data",{method: "post"}) %></p>
+    </div>
+    <table>
+      <tr>
+        <th>測定日</th>
+        <td colspan="3"><%= @data.measureDate %></td>
+      </tr>
+      <tr>
+        <th>コンパウンド名</th>
+        <td colspan="3"><%= @data.comp %></td>
+      </tr>
+      <tr>
+        <th>試験片形状</th>
+        <td colspan="3"><%= @data.testShape %></td>
+      </tr>
+      <tr>
+        <th>ロール条件</th>
+        <th>温度</th>
+        <th>時間</th>
+        <th>厚み</th>
+      </tr>
+      <tr>
+        <th></th>
+        <td><%= @data.temp %>℃</td>
+        <td><%= @data.time %>秒</td>
+        <td><%= @data.thickness %>mm</td>
+      </tr>
+      <tr>
+        <th>シート配合</th>
+        <th>着色材量</th>
+        <th>コンパウンド量</th>
+        <th><%= @data.tc %></th>
+      </tr>
+      <tr>
+        <th>FULL</th>
+        <td><%= @data.fullcolor %></td>
+        <td><%= @data.fullcomp %></td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <th>TINT</th>
+        <td><%= @data.tintcolor %></td>
+        <td><%= @data.tintcomp %></td>
+        <td><%= @data.tc_value %></td>
+      </tr>
+    </table>
+  </div>
+  <% #色差 %>
+  <% when "cd" %>
+  <div class="contents">
+    <h3>色差</h3>
+    <div class="menu">
+      <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@data.id}/cd/edit_data") %></p>
+      <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{@data.id}/cd/edit_data",{method: "post"}) %></p>
+    </div>
+    <table>
+      <tr>
+        <th>測定日</th>
+        <td colspan="4"><%= @data.measureDate %> </td>
+      </tr>
+      <tr>
+        <th>試作品Lab値</th>
+        <th>L*</th>
+        <th>a*</th>
+        <th>b*</th>
+        <th>-</th>
+      </tr>
+      <tr>
+        <th>FULL</th>
+        <td><%= @data.fullL %></td>
+        <td><%= @data.fulla %></td>
+        <td><%= @data.fullb %></td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <th>TINT</th>
+        <td><%= @data.tintL %></td>
+        <td><%= @data.tinta %></td>
+        <td><%= @data.tintb %></td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <th>試作品Δ値</th>
+        <th>ΔL*</th>
+        <th>Δa*</th>
+        <th>Δb*</th>
+        <th>ΔE</th>
+      </tr>
+      <tr>
+        <th>FULL</th>
+        <td><%= @data.fulldL %></td>
+        <td><%= @data.fullda %></td>
+        <td><%= @data.fulldb %></td>
+        <td><%= @data.fulldE %></td>
+      </tr>
+      <tr>
+        <th>TINT</th>
+        <td><%= @data.tintdL %></td>
+        <td><%= @data.tintda %></td>
+        <td><%= @data.tintdb %></td>
+        <td><%= @data.tintdE %></td>
+      </tr>
+    </table>
+  </div>
+  <% #水分値 %>
+  <% when "mv" %>
+  <div class="contents">
+    <h3>水分値</h3>
+    <div class="menu">
+      <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@data.id}/mv/edit_data") %></p>
+      <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{@data.id}/mv/edit_data",{method: "post"}) %></p>
+    </div>
+    <table>
+      <tr>
+        <th>測定日</th>
+        <td colspan="3"><%= @data.measureDate %></td>
+      </tr>
+      <tr>
+        <th>測定条件</th>
+        <th>温度</th>
+        <th>時間</th>
+        <th>終点</th>
+        <tr>
+          <th></th>
+          <td><%= @data.temp %>℃</td>
+          <td><%= @data.time %>分</td>
+          <td><%= @data.endpoint %>μg/s</td>
+        </tr>
+        <tr>
+          <th>測定値</th>
+          <td colspan="3"><%= @data.MV %>ppm</td>
+        </tr>
+      </table>
+    </div>
+  <% #VR残率 %>
+  <% when "vrv" %>
+  <div class="contents">
+    <h3>VR残率</h3>
+    <div class="menu">
+      <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@data.id}/vrv/edit_data") %></p>
+      <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{@data.id}/vrv/edit_data",{method: "post"}) %></p>
+    </div>
+    <table>
+      <tr>
+        <th>測定日</th>
+        <td colspan="3"><%= @data.measureDate %></td>
+      </tr>
+      <tr>
+        <th>コンパウンド名</th>
+        <td colspan="3"><%= @data.compname %></td>
+      </tr>
+      <tr>
+        <th>ロール条件</th>
+        <th>温度</th>
+        <th>時間</th>
+        <th>厚み</th>
+      </tr>
+      <tr>
+        <th></th>
+        <td><%= @data.temp %>℃</td>
+        <td><%= @data.time %>秒</td>
+        <td><%= @data.thickness %>mm</td>
+      </tr>
+      <tr>
+        <th>シート配合</th>
+        <th>着色剤量</th>
+        <th colspan="2">コンパウンド量</th>
+      </tr>
+      <tr>
+        <th></th>
+        <td><%= @data.color %></td>
+        <td colspan="2"><%= @data.comp %></td>
+      </tr>
+      <tr>
+        <th>測定値</th>
+        <th>ブランク抵抗値</th>
+        <th>試作品抵抗値</th>
+        <th>VR残率</th>
+      </tr>
+      <tr>
+        <th></th>
+        <td><%= @data.brank %>×10<span class="exponentiation"><%= @data.brank_expo %></spam></td>
+        <td><%= @data.test %>×10<span class="exponentiation"><%= @data.test_expo %></spam></td>
+        <td><%= @data.vr %></td>
+      </tr>
+    </table>
+  </div>
+  <% #粘度 %>
+  <% when "v" %>
+  <div class="contents">
+    <h3>粘度</h3>
+    <div class="menu">
+      <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@data.id}/v/edit_data") %></p>
+      <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{@data.id}/v/edit_data",{method: "post"}) %></p>
+    </div>
+    <table>
+      <tr>
+        <th>測定日</th>
+        <td colspan="2"><%= @data.measureDate %></td>
+      </tr>
+      <tr>
+        <th>温度</th>
+        <td colspan="2"><%= @data.temp %>℃</td>
+      </tr>
+      <tr>
+        <th>ローター番号</th>
+        <td colspan="2"><%= @data.roter %></td>
+      </tr>
+      <tr>
+        <th>回転数</th>
+        <th>①<%= @data.speed1 %>rpm</th>
+        <th>②<%= @data.speed2 %>rpm</th>
+      </tr>
+      <tr>
+        <th>粘度</th>
+        <td><%= @data.vs1 %>mPa・s</td>
+        <td><%= @data.vs2 %>mPa・s</td>
+      </tr>
+    </table>
+  </div>
+  <% end %>
+</div>

@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  formtype: MyString
+  proto_id: 1
+  number: MyString
+  temp: MyString
+  roter: MyString
+  speed1: 1
+  speed2: 1
+  vs1: 1
+  vs2: 1
+  user_id: 1
+  measureDate: 2020-11-14
+
+two:
+  formtype: MyString
+  proto_id: 1
+  number: MyString
+  temp: MyString
+  roter: MyString
+  speed1: 1
+  speed2: 1
+  vs1: 1
+  vs2: 1
+  user_id: 1
+  measureDate: 2020-11-14

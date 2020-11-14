@@ -1,0 +1,167 @@
+<h1><%= @name.name %>(顧客名:<%= @client.name %>)</h1>
+<h2>配合：<%= @proto.number %></h2>
+  <% if @cvs && @cds %>
+  <div class="contents excel">
+    <h3>〇色調</h3>
+    <% @cvs.each do |cv| %>
+    <p>FULL <%= cv.comp %> : 着色剤 = <%= cv.fullcomp %> : <%= cv.fullcolor %></p>
+    <p>TINT <%= cv.comp %> : 着色剤 : <%= cv.tc %> = <%= cv.tintcomp %> : <%= cv.tintcolor %> : <%= cv.tc_value %></p>
+    <% end %>
+    <% @cds.each do |cd| %>
+    <p>＜<%= cd.measureDate %>＞</p>
+      <div class="excel_cd">
+        <table class="margin_right">
+          <thead>
+            <tr>
+              <th>FULL</th>
+              <th>L*</th>
+              <th>a*</th>
+              <th>b*</th>
+              <th>E</th>
+            </tr>
+            <tr>
+              <th>STD</th>
+              <td><%= (cd.fullL.to_f - cd.fulldL.to_f).floor(2) %></td>
+              <td><%= (cd.fulla.to_f - cd.fullda.to_f).floor(2) %></td>
+              <td><%= (cd.fullb.to_f - cd.fulldb.to_f).floor(2) %></td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <th><%= @proto.number %></th>
+              <td><%= cd.fullL.to_f.floor(2) %></td>
+              <td><%= cd.fulla.to_f.floor(2) %></td>
+              <td><%= cd.fullb.to_f.floor(2) %></td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <th>Δ</th>
+              <td><%= cd.fulldL.to_f.floor(2) %></td>
+              <td><%= cd.fullda.to_f.floor(2) %></td>
+              <td><%= cd.fulldb.to_f.floor(2) %></td>
+              <td><%= cd.fulldE.to_f.floor(2) %></td>
+            </tr>
+          </thead>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>TINT</th>
+              <th>L*</th>
+              <th>a*</th>
+              <th>b*</th>
+              <th>E</th>
+            </tr>
+            <tr>
+              <th>STD</th>
+              <td><%= (cd.tintL.to_f - cd.tintdL.to_f).floor(2) %></td>
+              <td><%= (cd.tinta.to_f - cd.tintda.to_f).floor(2) %></td>
+              <td><%= (cd.tintb.to_f - cd.tintdb.to_f).floor(2) %></td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <th><%= @proto.number %></th>
+              <td><%= cd.tintL.to_f.floor(2) %></td>
+              <td><%= cd.tinta.to_f.floor(2) %></td>
+              <td><%= cd.tintb.to_f.floor(2) %></td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <th>Δ</th>
+              <td><%= cd.tintdL.to_f.floor(2) %></td>
+              <td><%= cd.tintda.to_f.floor(2) %></td>
+              <td><%= cd.tintdb.to_f.floor(2) %></td>
+              <td><%= cd.tintdE.to_f.floor(2) %></td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
+  <% if @vs %>
+    <h3>〇粘度</h3>
+    <p><%= @vs[0].roter %> , <%= @vs[0].temp %>℃</p>
+    <table>
+      <tr>
+        <th rowspan="2"></th>
+        <% @vs.each do |v| %>
+        <th colspan="2"><%= v.measureDate %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <% @vs.each do |v| %>
+        <th><%= v.speed1 %> rpm</th>
+        <th><%= v.speed2 %> rpm</th>
+        <% end %>
+      </tr>
+      <tr>
+        <th>STD</th>
+        <% @vs.each do |v| %>
+        <td></td>
+        <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <th><%= @proto.number %></th>
+        <% @vs.each do |v| %>
+        <td><%= v.vs1 %></td>
+        <td><%= v.vs2 %></td>
+        <% end %>
+      </tr>
+    </table>
+  <% end %>
+  <% if @mvs %>
+    <h3>〇水分値</h3>
+    <p><%= @mvs[0].temp %>℃ , <%= @mvs[0].time %>分 , 終点<%= @mvs[0].endpoint %>μg/s</p>
+    <table>
+      <tr>
+        <th></th>
+        <% @mvs.each do |mv| %>
+        <th><%= mv.measureDate %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <th>STD</th>
+        <% @mvs.each do |mv| %>
+        <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <th><%= @proto.number %></th>
+        <% @mvs.each do |mv| %>
+        <td><%= mv.MV %></td>
+        <% end %>
+      </tr>
+    </table>
+  <% end %>
+  <% if @vrvs %>
+    <h3>〇VR残率</h3>
+    <table>
+      <tr>
+        <th></th>
+        <% @vrvs.each do |vrv| %>
+          <th><%= vrv.measureDate %><br>着色剤：<%= vrv.color %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <th>ブランク</th>
+        <% @vrvs.each do |vrv| %>
+          <td><%= vrv.brank %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <th><%= @proto.number %></th>
+        <% @vrvs.each do |vrv| %>
+          <td><%= vrv.test %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <th>VR残率</th>
+        <% @vrvs.each do |vrv| %>
+          <td><%= vrv.vr %></td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+  <% end %>
+  <%  %>
+<%= link_to "Excel出力", prototype_write_report_path(format: :xlsx , data:@proto.id),{class: "fixed_btn"} %>

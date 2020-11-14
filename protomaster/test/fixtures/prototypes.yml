@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  formtype: MyString
+  name: 1
+  number: MyString
+  condition: MyText
+  particle: MyString
+  memo: MyText
+  client: 1
+  measureDate: 2020-11-14
+
+two:
+  user_id: 1
+  formtype: MyString
+  name: 1
+  number: MyString
+  condition: MyText
+  particle: MyString
+  memo: MyText
+  client: 1
+  measureDate: 2020-11-14

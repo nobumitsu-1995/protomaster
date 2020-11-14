@@ -1,0 +1,23 @@
+<div class="contents">
+  <h1>半製品一覧</h1>
+  <table class="index">
+    <thead>
+      <tr>
+        <th class="hp_index_code">品コード</th>
+        <th class="hp_index_name">半製品名</th>
+        <th class="hp_index_pig">顔料名</th>
+        <th class="hp_index_dispersant">分散剤名</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @hps.each do |hp| %>
+        <tr>
+          <th><%= hp.code %></th>
+          <th><%= link_to(hp.name,"/half_product/#{hp.id}/show") %></th>
+          <th><%= hp.pigment %>(<%= hp.pigment_per %>%)</th>
+          <th><%= hp.dispersant %>(<%= hp.dispersant_per %>%)</th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

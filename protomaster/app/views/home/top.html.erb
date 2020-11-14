@@ -1,0 +1,31 @@
+<div class="containar">
+  <div class="contents">
+    <h1>メニュー</h1>
+    <table class="index">
+      <thead>
+        <tr>
+          <th>試作品</th>
+          <th>半製品</th>
+          <th>顔料</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= link_to("試作品マスター登録","/prototype/new")%></td>
+          <td><%= link_to("半製品マスター登録","/half_product/new")%></td>
+          <td><%= link_to("顔料マスター登録","/pigment/new")%></td>
+        </tr>
+        <tr>
+          <td><%= link_to("試作品照会","/prototype/index") %></td>
+          <td><%= link_to("半製品照会","/half_product/index") %></td>
+          <td><%= link_to("顔料照会","/pigment/index") %></td>
+        </tr>
+        <tr>
+          <td><%= link_to("レポート作製","/prototype/report")%></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<h1><%= @hp.name %>(品コード：<%= @hp.code %>)</h1>
+<div class="menu">
+  <p><i class="fas fa-edit"></i><%= link_to("編集","/half_product/#{params[:id]}/edit") %></p>
+  <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/half_product/#{params[:id]}/destroy",{method: "post"}) %></p>
+</div>
+<div class="containar">
+  <div class="contents">
+    <table>
+      <tr>
+        <th>品コード</th>
+        <td><%= @hp.code %></td>
+      </tr>
+      <tr>
+        <th>品名</th>
+        <td><%= @hp.name %></td>
+      </tr>
+      <tr>
+        <th>使用顔料</th>
+        <td><%= @hp.pigment %>　(<%= @hp.pigment_per %>%)</td>
+      </tr>
+      <tr>
+        <th>使用分散剤</th>
+        <td><%= @hp.dispersant %>　(<%= @hp.dispersant_per %>%)</td>
+      </tr>
+    </table>
+  </div>
+</div>

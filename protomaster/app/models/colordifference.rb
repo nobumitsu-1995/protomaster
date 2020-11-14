@@ -1,0 +1,2 @@
+class Colordifference < ApplicationRecord
+end

@@ -1,0 +1,29 @@
+  <h1>試作品マスター登録</h1>
+  <%= form_tag("/prototype/create") do %>
+  <div class="containar">
+    <div class="contents">
+      <table>
+        <tr>
+          <th><p>形状</p></th>
+          <td>
+            <div>
+              <%= radio_button_tag(:formtype,"masterbatch") %>
+              <%= label_tag(:formtype_masterbatch, "マスターバッチ") %><br>
+              <%= radio_button_tag(:formtype,"pastecolor") %>
+              <%= label_tag(:formtype_pastecolor, "ペーストカラー") %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th><p>品名</p></th>
+          <td><input type="text" name="name" value="<%= @proto.name %>"></td>
+        </tr>
+        <tr>
+          <th><p>顧客名</p></th>
+          <td><input type="text" name="client" value="<%= @proto.client %>"></td>
+        </tr>
+      </table>
+      <input class="btn" type="submit" value="試作品情報 作成">
+    </div>
+  </div>
+  <% end %>

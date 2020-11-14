@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: 1
+  name: MyString
+  pigment: MyString
+  pigment_per: 
+  dispersant: MyString
+  dispersant_per: 
+  pigment2: MyString
+  pigment2_per: 
+  dispersant2: MyString
+  dispersant2_per: 
+  plasticizer: MyString
+
+two:
+  code: 1
+  name: MyString
+  pigment: MyString
+  pigment_per: 
+  dispersant: MyString
+  dispersant_per: 
+  pigment2: MyString
+  pigment2_per: 
+  dispersant2: MyString
+  dispersant2_per: 
+  plasticizer: MyString

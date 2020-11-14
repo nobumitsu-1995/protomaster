@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: 1
+  name: MyString
+  maker: MyString
+  pig_no: MyString
+  structure: MyString
+
+two:
+  code: 1
+  name: MyString
+  maker: MyString
+  pig_no: MyString
+  structure: MyString

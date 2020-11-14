@@ -1,0 +1,425 @@
+  <h1><%= @name.name %>(顧客名:<%= @client.name %>)</h1>
+  <div class="menu">
+    <p><i class="fas fa-plus"></i></i><%= link_to("追加",("/prototype/#{params[:id]}/add_data")) %></p>
+    <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{params[:id]}/destroy_datas",{method: "post"}) %></p>
+  </div>
+  <div class="containar">
+    <% #基本情報 %>
+    <div class="contents">
+      <h3>試作品情報</h3>
+      <table>
+        <tr>
+          <th>形状</th>
+          <td><%= @name.formtype %></td>
+        </tr>
+        <tr>
+          <th>品名</th>
+          <td><%= @name.name %></td>
+        </tr>
+        <tr>
+          <th>顧客名</th>
+          <td><%= @client.name %></td>
+        </tr>
+        <tr>
+          <th>配合番号</th>
+          <td><%= @proto.number %></td>
+        </tr>
+        <tr>
+          <th>作製日</th>
+          <td><%= @proto.measureDate %></td>
+        </tr>
+        <tr>
+          <th>粒度</th>
+          <td><%= @proto.particle %></td>
+        </tr>
+        <tr>
+          <th>加工条件</th>
+          <td><%= @proto.conditions %></td>
+        </tr>
+        <tr>
+          <th>メモ</th>
+          <td><%= @proto.memo %></td>
+        </tr>
+      </table>
+    </div>
+    <% #マスターバッチメニュー %>
+    <% if @proto.formtype == "masterbatch" %>
+    <% #色見条件 %>
+    <% @cvs.each do |cv| %>
+    <div class="contents">
+      <h3><%= link_to("色見条件","/prototype/#{cv.id}/cv/data") %></h3>
+      <div class="menu">
+        <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{cv.id}/cv/edit_data") %></p>
+        <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{cv.id}/cv/destroy_data",{method: "post"}) %></p>
+      </div>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="3"><%= cv.measureDate %></td>
+        </tr>
+        <tr>
+          <th>コンパウンド名</th>
+          <td colspan="3"><%= cv.comp %></td>
+        </tr>
+        <tr>
+          <th>試験片形状</th>
+          <td colspan="3"><%= cv.testShape %></td>
+        </tr>
+        <tr>
+          <th>ロール条件</th>
+          <th>温度</th>
+          <th>時間</th>
+          <th>厚み</th>
+        </tr>
+        <tr>
+          <th></th>
+          <td><%= cv.temp %>℃</td>
+          <td><%= cv.time %>秒</td>
+          <td><%= cv.thickness %>mm</td>
+        </tr>
+        <tr>
+          <th>シート配合</th>
+          <th>着色材量</th>
+          <th>コンパウンド量</th>
+          <th><%= cv.tc %></th>
+        </tr>
+        <tr>
+          <th>FULL</th>
+          <td><%= cv.fullcolor %></td>
+          <td><%= cv.fullcomp %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <th>TINT</th>
+          <td><%= cv.tintcolor %></td>
+          <td><%= cv.tintcomp %></td>
+          <td><%= cv.tc_value %></td>
+        </tr>
+      </table>
+    </div>
+    <% end %>
+    <% #色差 %>
+    <% @cds.each do |cd| %>
+    <div class="contents">
+      <h3><%= link_to("色差","/prototype/#{cd.id}/cd/data") %></h3>
+      <div class="menu">
+        <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{cd.id}/cd/edit_data") %></p>
+        <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{cd.id}/cd/destroy_data",{method: "post"}) %></p>
+      </div>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="4"><%= cd.measureDate %> </td>
+        </tr>
+        <tr>
+          <th>試作品Lab値</th>
+          <th>L*</th>
+          <th>a*</th>
+          <th>b*</th>
+          <th>-</th>
+        </tr>
+        <tr>
+          <th>FULL</th>
+          <td><%= cd.fullL %></td>
+          <td><%= cd.fulla %></td>
+          <td><%= cd.fullb %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <th>TINT</th>
+          <td><%= cd.tintL %></td>
+          <td><%= cd.tinta %></td>
+          <td><%= cd.tintb %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <th>試作品Δ値</th>
+          <th>ΔL*</th>
+          <th>Δa*</th>
+          <th>Δb*</th>
+          <th>ΔE</th>
+        </tr>
+        <tr>
+          <th>FULL</th>
+          <td><%= cd.fulldL %></td>
+          <td><%= cd.fullda %></td>
+          <td><%= cd.fulldb %></td>
+          <td><%= cd.fulldE %></td>
+        </tr>
+        <tr>
+          <th>TINT</th>
+          <td><%= cd.tintdL %></td>
+          <td><%= cd.tintda %></td>
+          <td><%= cd.tintdb %></td>
+          <td><%= cd.tintdE %></td>
+        </tr>
+      </table>
+    </div>
+    <% end %>
+    <% #水分値 %>
+    <% @mvs.each do |mv| %>
+    <div class="contents">
+      <h3><%= link_to("水分値","/prototype/#{mv.id}/mv/data") %></h3>
+      <div class="menu">
+        <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{mv.id}/mv/edit_data") %></p>
+        <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{mv.id}/mv/destroy_data",{method: "post"}) %></p>
+      </div>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="3"><%= mv.measureDate %></td>
+        </tr>
+        <tr>
+          <th>測定条件</th>
+          <th>温度</th>
+          <th>時間</th>
+          <th>終点</th>
+        <tr>
+          <th></th>
+          <td><%= mv.temp %>℃</td>
+          <td><%= mv.time %>分</td>
+          <td><%= mv.endpoint %>μg/s</td>
+        </tr>
+        <tr>
+          <th>測定値</th>
+          <td colspan="3"><%= mv.MV %>ppm</td>
+        </tr>
+      </table>
+    </div>
+    <% end %>
+    <% #VR残率 %>
+    <% @vrvs.each do |vrv| %>
+    <div class="contents">
+      <h3><%= link_to("VR残率","/prototype/#{vrv.id}/vrv/data") %></h3>
+      <div class="menu">
+        <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{vrv.id}/vrv/edit_data") %></p>
+        <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{vrv.id}/vrv/destroy_data",{method: "post"}) %></p>
+      </div>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="3"><%= vrv.measureDate %></td>
+        </tr>
+        <tr>
+          <th>コンパウンド名</th>
+          <td colspan="3"><%= vrv.compname %></td>
+        </tr>
+        <tr>
+          <th>ロール条件</th>
+          <th>温度</th>
+          <th>時間</th>
+          <th>厚み</th>
+        </tr>
+        <tr>
+          <th></th>
+          <td><%= vrv.temp %>℃</td>
+          <td><%= vrv.time %>秒</td>
+          <td><%= vrv.thickness %>mm</td>
+        </tr>
+        <tr>
+          <th>シート配合</th>
+          <th>着色剤量</th>
+          <th colspan="2">コンパウンド量</th>
+        </tr>
+        <tr>
+          <th></th>
+          <td><%= vrv.color %></td>
+          <td colspan="2"><%= vrv.comp %></td>
+        </tr>
+        <tr>
+          <th>測定値</th>
+          <th>ブランク抵抗値</th>
+          <th>試作品抵抗値</th>
+          <th>VR残率</th>
+        </tr>
+        <tr>
+          <th></th>
+          <td><%= vrv.brank %>×10<span class="exponentiation"><%= vrv.brank_expo %></spam></td>
+          <td><%= vrv.test %>×10<span class="exponentiation"><%= vrv.test_expo %></spam></td>
+          <td><%= vrv.vr %></td>
+        </tr>
+      </table>
+    </div>
+    <% end %>
+    <% end %>
+    <% #ペーストカラーメニュー %>
+    <% if @proto.formtype == "pastecolor" %>
+    <% #色見条件 %>
+    <% @cvs.each do |cv| %>
+    <div class="contents">
+      <h3><%= link_to("色見条件","/prototype/#{cv.id}/cv/data") %></h3>
+      <div class="menu">
+        <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{cv.id}/cv/edit_data") %></p>
+        <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{cv.id}/cv/destroy_data",{method: "post"}) %></p>
+      </div>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="3"><%= cv.measureDate %></td>
+        </tr>
+        <tr>
+          <th>コンパウンド名</th>
+          <td colspan="3"><%= cv.comp %></td>
+        </tr>
+        <tr>
+          <th>試験片形状</th>
+          <td colspan="3"><%= cv.testShape %></td>
+        </tr>
+        <tr>
+          <th>ロール条件</th>
+          <th>温度</th>
+          <th>時間</th>
+          <th>厚み</th>
+        </tr>
+        <tr>
+          <th></th>
+          <td><%= cv.temp %>℃</td>
+          <td><%= cv.time %>秒</td>
+          <td><%= cv.thickness %>mm</td>
+        </tr>
+        <tr>
+          <th>シート配合</th>
+          <th>着色材量</th>
+          <th>コンパウンド量</th>
+          <th><%= cv.tc %></th>
+        </tr>
+        <tr>
+          <th>FULL</th>
+          <td><%= cv.fullcolor %></td>
+          <td><%= cv.fullcomp %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <th>TINT</th>
+          <td><%= cv.tintcolor %></td>
+          <td><%= cv.tintcomp %></td>
+          <td><%= cv.tc_value %></td>
+        </tr>
+      </table>
+    </div>
+    <% end %>
+    <% #色差 %>
+    <% @cds.each do |cd| %>
+    <div class="contents">
+      <h3><%= link_to("色差","/prototype/#{cd.id}/cd/data") %></h3>
+      <div class="menu">
+        <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{cd.id}/cd/edit_data") %></p>
+        <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{cd.id}/cd/destroy_data",{method: "post"}) %></p>
+      </div>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="4"><%= cd.measureDate %> </td>
+        </tr>
+        <tr>
+          <th>試作品Lab値</th>
+          <th>L*</th>
+          <th>a*</th>
+          <th>b*</th>
+          <th>-</th>
+        </tr>
+        <tr>
+          <th>FULL</th>
+          <td><%= cd.fullL %></td>
+          <td><%= cd.fulla %></td>
+          <td><%= cd.fullb %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <th>TINT</th>
+          <td><%= cd.tintL %></td>
+          <td><%= cd.tinta %></td>
+          <td><%= cd.tintb %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <th>試作品Δ値</th>
+          <th>ΔL*</th>
+          <th>Δa*</th>
+          <th>Δb*</th>
+          <th>ΔE</th>
+        </tr>
+        <tr>
+          <th>FULL</th>
+          <td><%= cd.fulldL %></td>
+          <td><%= cd.fullda %></td>
+          <td><%= cd.fulldb %></td>
+          <td><%= cd.fulldE %></td>
+        </tr>
+        <tr>
+          <th>TINT</th>
+          <td><%= cd.tintdL %></td>
+          <td><%= cd.tintda %></td>
+          <td><%= cd.tintdb %></td>
+          <td><%= cd.tintdE %></td>
+        </tr>
+      </table>
+    </div>
+    <% end %>
+    <% #粘度 %>
+    <% @vs.each do |v| %>
+    <div class="contents">
+      <h3><%= link_to("粘度","/prototype/#{v.id}/v/data") %></h3>
+      <div class="menu">
+        <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{v.id}/v/edit_data") %></p>
+        <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{v.id}/v/destroy_data",{method: "post"}) %></p>
+      </div>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="2"><%= v.measureDate %></td>
+        </tr>
+        <tr>
+          <th>温度</th>
+          <td colspan="2"><%= v.temp %>℃</td>
+        </tr>
+        <tr>
+          <th>ローター番号</th>
+          <td colspan="2"><%= v.roter %></td>
+        </tr>
+        <tr>
+          <th>回転数</th>
+          <th>①<%= v.speed1 %>rpm</th>
+          <th>②<%= v.speed2 %>rpm</th>
+        </tr>
+        <tr>
+          <th>粘度</th>
+          <td><%= v.vs1 %>mPa・s</td>
+          <td><%= v.vs2 %>mPa・s</td>
+        </tr>
+      </table>
+    </div>
+    <% end %>
+    <% #水分値 %>
+    <% @mvs.each do |mv| %>
+    <div class="contents">
+      <h3><%= link_to("水分値","/prototype/#{mv.id}/mv/data") %></h3>
+      <div class="menu">
+        <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{mv.id}/mv/edit_data") %></p>
+        <p class="delete_alert"><i class="fas fa-trash-alt"></i><%= link_to("削除","/prototype/#{mv.id}/mv/destroy_data",{method: "post"}) %></p>
+      </div>
+      <table>
+        <tr>
+          <th>測定日</th>
+          <td colspan="3"><%= mv.measureDate %></td>
+        </tr>
+        <tr>
+          <th>測定条件</th>
+          <th>温度</th>
+          <th>時間</th>
+          <th>終点</th>
+          <tr>
+            <th></th>
+            <td><%= mv.temp %>℃</td>
+            <td><%= mv.time %>分</td>
+            <td><%= mv.endpoint %>μg/s</td>
+          </tr>
+          <tr>
+            <th>測定値</th>
+            <td colspan="3"><%= mv.MV %>ppm</td>
+          </tr>
+        </table>
+      </div>
+    <% end %>
+    <% end %>
+  </div>

@@ -1,0 +1,22 @@
+<h1>ユーザー情報編集</h1>
+<div class="containar">
+  <div class="contents">
+    <%= form_tag("/user/update") do %>
+    <table>
+      <tr>
+        <th>社員コード</th>
+        <td><input type="number" name="number" value="<%= @user.number %>"></td>
+      </tr>
+      <tr>
+        <th>名前</th>
+        <td><input type="text" name="name" value="<%= @user.name %>"></td>
+      </tr>
+      <tr>
+        <th>パスワード</th>
+        <td><input type="password" name="password" value="<%= @user.password %>"></td>
+      </tr>
+    </table>
+    <input class="btn2" type="submit" value="ユーザー情報更新">
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+class Pigment < ApplicationRecord
+end

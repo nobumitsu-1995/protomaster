@@ -1,0 +1,68 @@
+// Place all the styles related to the user controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.user_menu{
+  position: absolute;
+  bottom: 60px;
+  font-size: 13px;
+  text-align: center;
+  margin-left: 45px;
+}
+.user_menu li{
+  margin-bottom: 2px;
+}
+.border{
+  text-decoration: underline;
+}
+.border a{
+  color: #B32034;
+  font-weight: bold;
+  line-height: 40px;
+}
+#delete_user:hover{
+  cursor: pointer;
+}
+#modal_background{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+.modal{
+  width: 350px;
+  border: 2px solid #AAAAAA;
+  background: #fff;
+  overflow: hidden;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+
+}
+.modal_top{
+  padding: 10px;
+  background: #aaa;
+}
+.fa-times-circle{
+  position: relative;
+  float: right;
+}
+.fa-times-circle:hover{
+  cursor: pointer;
+}
+#modal h3 {
+  margin: 0;
+  color: #B32034;
+  font-weight: bold;
+}
+.passspace{
+  margin: 30px;
+}
+.modal_bottom{
+  padding: 15px;
+  background: #e3e3e3;
+}

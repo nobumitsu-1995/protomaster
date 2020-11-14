@@ -1,0 +1,131 @@
+// Place all the styles related to the prototype controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+//new
+.containar{
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-around;
+}
+.contents{
+  padding: 10px;
+  border: 2px solid #AAAAAA;
+  background: #fff;
+  margin: 2.5px;
+  position: relative;
+  overflow: hidden;
+}
+.contents table{
+  border: 2px solid #88BCCB;
+  border-radius: 2px;
+  border-collapse: collapse;
+  padding: 5px;
+}
+.contents th{
+  padding: 5px;
+  background: #C3D6DB;
+  border: 1px solid #fff;
+  font-weight: normal;
+  text-align: left;
+}
+.contents td{
+  padding: 5px;
+  border: 1px solid #fff;
+  background: #eee;
+}
+.btn2{
+  float: right;
+  margin-top: 10px;
+}
+
+//new_mb
+.sheet-item{
+  width: 45px;
+}
+.sheet-item2{
+  width: 80px;
+}
+.fixed_btn{
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  background: #EFEFEF;
+  border:1px solid #767676;
+}
+.exponentiation{
+  width: 30px;
+  height: 8px;
+  font-size: 6px;
+  vertical-align: super;
+}
+
+//show
+.contents_add{
+  position: absolute;
+  right: 10px;
+}
+
+//index
+.index{
+  width: 100%;
+}
+.menu{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.menu p{
+  margin-right: 10px;
+}
+.index_name{
+  width: 15%;
+}
+.index_formtype{
+  width: 10%;
+}
+.index_client{
+  width: 15%;
+}
+.index_proto_number{
+  width: 25%;
+}
+.index_measureDate{
+  width: 15%;
+}
+.index_menu{
+  width: 20%;
+}
+.index thead tr th{
+  background: #008995;
+  color: #E3E3E3;
+  font-weight: bold;
+}
+
+//report
+p span {
+  color: #BE4555;
+  font-weight: bold;
+}
+.excel{
+  width: 750px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.excel_cd{
+  display: flex;
+}
+.excel h3{
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.margin_right{
+  margin-right: 5px;
+}

@@ -1,0 +1,18 @@
+<h1>ログイン</h1>
+<div class="containar">
+  <div class="contents">
+    <%= form_tag("/user/login")do %>
+    <table>
+      <tr>
+        <th>社員コード</th>
+        <td><input type="number" name="number" value="<%= @user.number %>"></td>
+      </tr>
+      <tr>
+        <th>パスワード</th>
+        <td><input type="password" name="password" value="<%= @user.name %>"></td>
+      </tr>
+    </table>
+    <input class="btn2" type="submit" value="ログイン">
+    <% end %>
+  </div>
+</div>
