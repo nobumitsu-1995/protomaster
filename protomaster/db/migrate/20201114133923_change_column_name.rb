@@ -1,5 +1,5 @@
 class ChangeColumnName < ActiveRecord::Migration[6.0]
   def change
-    rename_column :prototype, :condition, :conditions
+    rename_column :prototypes, :condition, :conditions
   end
 end
