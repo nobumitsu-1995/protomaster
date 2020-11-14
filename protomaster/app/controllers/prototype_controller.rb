@@ -386,7 +386,7 @@ before_action :authenticate_user
         proto_data.destroy
       end
       proto.destroy
-      redirect_to("prototype/index")
+      redirect_to("/prototype/index")
     elsif proto.formtype == "pastecolor"
       proto_datas.each do |proto_data|
         cvs = Colorviewing.where(proto_id:proto_data.id)
@@ -402,7 +402,7 @@ before_action :authenticate_user
         proto_data.destroy
       end
       proto.destroy
-      redirect_to("prototype/index")
+      redirect_to("/prototype/index")
     end
   end
 
