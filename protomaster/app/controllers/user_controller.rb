@@ -67,7 +67,7 @@ class UserController < ApplicationController
     @user = User.new(
       number: params[:number],
       name: params[:name],
-      password_digest: params[:password_digest]
+      password: params[:password_digest]
     )
     if @user.save
       session[:user_id] = @user.id
