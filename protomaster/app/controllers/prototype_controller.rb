@@ -313,18 +313,26 @@ before_action :authenticate_user
 
   def sort
     if params[:column] == "name"
-      @proto_name = PrototypeName.find_by(name: params[:search_txt])
-      @protos = Prototype.order(name: :asc)
-      @selected = "name"
-      @text = params[:search_txt]
+      if @proto_name = PrototypeName.find_by(name: params[:search_txt])
+        @protos = Prototype.order(name: :asc)
+        @selected = "name"
+        @text = params[:search_txt]
+      else
+        flash[:notice] = "検索結果が見つかりませんでした。"
+        render("prototype/index")
+      end
     elsif params[:column] == "client"
-      @client = Client.find_by(name: params[:search_txt])
-      @protos_name = PrototypeName.where(client: @client.id)
-      @protos = Prototype.order(name: :asc)
-      @selected = "client"
-      @text = params[:search_txt]
+      if @client = Client.find_by(name: params[:search_txt])
+        @protos_name = PrototypeName.where(client: @client.id)
+        @protos = Prototype.order(name: :asc)
+        @selected = "client"
+        @text = params[:search_txt]
+      else
+        flash[:notice] = "検索結果が見つかりませんでした。"
+        render("prototype/index")
+      end
     else
-      flash[:notice] = "検索結果がありませんでした。"
+      flash[:notice] = "検索結果が見つかりませんでした。"
       render("prototype/index")
     end
   end
@@ -626,6 +634,10 @@ before_action :authenticate_user
 
   def edit_data
     case params[:table]
+    when "proto"
+      @proto = Prototype.find_by(id: params[:id])
+      @name = PrototypeName.find_by(id: @proto.name)
+      @client = Client.find_by(id: @name.client)
     when "cv"
       @data = Colorviewing.find_by(id: params[:id])
       @proto = Prototype.find_by(id: @data.proto_id)
@@ -656,6 +668,16 @@ before_action :authenticate_user
 
   def update_data
     case params[:table]
+    when "proto"
+      @data = Prototype.find_by(id: params[:id])
+      @name = PrototypeName.find_by(id: @data.name)
+      @client = Client.find_by(id: @name.client)
+
+      @data.number = params[:number]
+      @data.measureDate = params[:measureDate]
+      @data.particle = params[:particle]
+      @data.conditions = params[:conditions]
+      @data.memo = params[:memo]
     when "cv"
       @data = Colorviewing.find_by(id: params[:id])
       @proto = Prototype.find_by(id: @data.proto_id)

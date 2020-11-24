@@ -28,7 +28,7 @@ class PigmentController < ApplicationController
   end
 
   def index
-    @pigs = Pigment.all
+    @pigs = Pigment.order(name: :asc)
   end
 
   def sort

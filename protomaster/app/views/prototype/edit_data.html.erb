@@ -5,6 +5,50 @@
 </div>
 <div class="containar">
   <% case params[:table] %>
+  <% when "table" %>
+    <%= form_tag("/prototype/#{params[:id]}/proto/update_data")do %>
+    <div class="contents">
+      <h3>試作品情報</h3>
+      <div class="menu">
+        <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@proto.id}/proto/edit_data") %></p>
+      </div>
+      <table>
+        <tr>
+          <th>形状</th>
+          <td><%= @name.formtype %></td>
+        </tr>
+        <tr>
+          <th>品名</th>
+          <td><%= @name.name %></td>
+        </tr>
+        <tr>
+          <th>顧客名</th>
+          <td><%= @client.name %></td>
+        </tr>
+        <tr>
+          <th>配合番号</th>
+          <td><input type="text" name="number" value="<%= @data.number %>"></td>
+        </tr>
+        <tr>
+          <th>作製日</th>
+          <td><input type="date" name="measureDate" value="<%= @data.measureDate %>"></td>
+        </tr>
+        <tr>
+          <th>粒度</th>
+          <td><input type="text" name="particle" value="<%= @data.particle %>"></td>
+        </tr>
+        <tr>
+          <th>加工条件</th>
+          <td><textarea name="conditions" value="<%= @data.conditions %>" rows="3" cols="33" placeholder="使用機器、加工温度、回転数、時間、パス回数"></textarea></td>
+        </tr>
+        <tr>
+          <th>メモ</th>
+          <td><textarea name="memo" value="<%= @data.memo %>" rows="3" cols="33"></textarea></td>
+        </tr>
+      </table>
+    </div>
+
+    <% end %>
     <% #色見条件 %>
   <% when "cv" %>
     <%= form_tag("/prototype/#{params[:id]}/cv/update_data")do %>

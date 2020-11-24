@@ -7,6 +7,9 @@
     <% #基本情報 %>
     <div class="contents">
       <h3>試作品情報</h3>
+      <div class="menu">
+        <p><i class="fas fa-edit"></i><%= link_to("編集","/prototype/#{@proto.id}/proto/edit_data") %></p>
+      </div>
       <table>
         <tr>
           <th>形状</th>
