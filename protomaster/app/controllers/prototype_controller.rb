@@ -329,7 +329,7 @@ before_action :authenticate_user
         @text = params[:search_txt]
       else
         flash[:notice] = "検索結果が見つかりませんでした。"
-        render("prototype/index")
+        redirect_to("/prototype/index")
       end
     else
       flash[:notice] = "検索結果が見つかりませんでした。"
