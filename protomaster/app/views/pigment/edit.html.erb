@@ -1,4 +1,4 @@
-<h1>顔料マスター登録</h1>
+<h1>顔料マスター編集</h1>
 <%= form_tag("/pigment/#{params[:id]}/update") do %>
   <div class="containar">
     <div class="contents">
@@ -24,7 +24,7 @@
           <td><input type="text" name="structure" value="<%= @pig.structure %>"></td>
         </tr>
       </table>
-      <input class="btn" type="submit" value="顔料情報 編集">
+      <input class="btn" type="submit" value="顔料情報 更新">
     </div>
   </div>
 <% end %>

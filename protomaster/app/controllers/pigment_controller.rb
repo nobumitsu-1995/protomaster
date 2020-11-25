@@ -90,7 +90,7 @@ class PigmentController < ApplicationController
     @pig.structure = params[:structure]
     if @pig.save
       flash[:notice] = "編集内容を保存しました。"
-      redirect_to("/pigment/#{pig.id}/show")
+      redirect_to("/pigment/#{@pig.id}/show")
     else
       flash[:notice] = "編集の保存に失敗しました。"
       render("pigment/edit")
