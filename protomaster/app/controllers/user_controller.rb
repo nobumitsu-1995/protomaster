@@ -1,8 +1,14 @@
 class UserController < ApplicationController
-  before_action :forbid_login_user , {only: [:create, :login_form, :login, :signin]}
+  before_action :forbid_login_user , {only: [:login_form, :login]}
   before_action :authenticate_user , {only: [:edit, :show, :update, :destroy, :logout]}
+
   def create
-    @user = User.new
+    if @current_user && @current_user.admin_user == 1
+      @user = User.new
+    else
+      flash[:notice] = "管理者権限を持っていません。"
+      redirect_to("/")
+    end
   end
 
   def edit
@@ -64,17 +70,21 @@ class UserController < ApplicationController
   end
 
   def signin
-    @user = User.new(
-      number: params[:number],
-      name: params[:name],
-      password: params[:password_digest]
-    )
-    if @user.save
-      session[:user_id] = @user.id
-      flash[:notice] = "ユーザー登録を完了しました。"
-      redirect_to("/")
+    if @current_user.admin_user == 1
+      @user = User.new(
+        number: params[:number],
+        name: params[:name],
+        password: params[:password_digest]
+      )
+      if @user.save
+        flash[:notice] = "ユーザー登録を完了しました。社員番号:#{@user.number},名前:#{@user.name}"
+        redirect_to("/")
+      else
+        render "user/create"
+      end
     else
-      render "user/create"
+      flash[:notice] = "管理者権限を持っていません。"
+      redirect_to("/")
     end
   end
 

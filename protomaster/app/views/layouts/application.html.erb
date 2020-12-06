@@ -62,12 +62,14 @@
             <li><%= @current_user.number %></li>
             <li class="border">ユーザー名</li>
             <li><%= link_to(@current_user.name,"/user/show") %></li>
+            <% if @current_user && @current_user.admin == true %>
+              <li class="red"><%= link_to("ユーザー登録","/user/create") %></li>
+            <% end %>
             <%= form_tag("/user/logout")do %>
             <li><input type="submit" value="ログアウト"></li>
             <% end %>
           <% else %>
             <li><%= link_to("ログイン","/user/login_form") %></li>
-            <li class="red"><%= link_to("ユーザー登録","/user/create") %></li>
           <% end %>
         </ul>
       </header>
@@ -124,8 +126,10 @@
         <% if @current_user %>
           <p><%= link_to("ユーザー情報","/user/show") %></p>
           <p><%= link_to("ユーザー情報編集","/user/edit") %></p>
-        <% else %>
+          <% if @current_user.admin == true %>
           <p><%= link_to("ユーザー登録","/user/create") %></p>
+          <% end %>
+        <% else %>
           <p><%= link_to("ログイン","/user/login_form") %></p>
         <% end %>
       </div>
