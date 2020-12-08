@@ -70,7 +70,7 @@ class UserController < ApplicationController
   end
 
   def signin
-    if @current_user.admin_user == 1
+    if @current_user && @current_user.admin_user == 1
       @user = User.new(
         number: params[:number],
         name: params[:name],

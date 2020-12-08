@@ -53,3 +53,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'caxlsx_rails'
 gem 'rspec-rails'
+gem 'rails-controller-testing'
