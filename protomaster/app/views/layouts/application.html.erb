@@ -126,7 +126,7 @@
         <% if @current_user %>
           <p><%= link_to("ユーザー情報","/user/show") %></p>
           <p><%= link_to("ユーザー情報編集","/user/edit") %></p>
-          <% if @current_user.admin == true %>
+          <% if @current_user.admin_user == 1 %>
           <p><%= link_to("ユーザー登録","/user/create") %></p>
           <% end %>
         <% else %>
