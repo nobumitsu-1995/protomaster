@@ -62,7 +62,7 @@
             <li><%= @current_user.number %></li>
             <li class="border">ユーザー名</li>
             <li><%= link_to(@current_user.name,"/user/show") %></li>
-            <% if @current_user && @current_user.admin == true %>
+            <% if @current_user && @current_user.admin_user == 1 %>
               <li class="red"><%= link_to("ユーザー登録","/user/create") %></li>
             <% end %>
             <%= form_tag("/user/logout")do %>
